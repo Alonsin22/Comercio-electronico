@@ -1,0 +1,160 @@
+{% extends 'aplicacion/templates.html' %}
+
+    {% block crear %}
+
+    <head>
+
+        <style>
+            /* Estilo para el formulario de registrar platillos */
+            .formulario-platillo {
+                background-color: #ffffff;
+                padding: 20px;
+                margin: 20px auto;
+                width: 60%;
+                border-radius: 10px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        
+            .formulario-platillo h2 {
+                text-align: center;
+                margin-bottom: 15px;
+                color: #333333;
+            }
+        
+            .grupo-input {
+                margin-bottom: 15px;
+            }
+        
+            .grupo-input label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+        
+            .grupo-input input, .grupo-input textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+        
+            .btn-crear {
+                width: 100%;
+                background-color: #007bff;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+        
+            .btn-crear:hover {
+                background-color: #0056b3;
+            }
+        
+            /* Estilo para la lista de platillos */
+            .contenedor-platillos {
+                background-color: #f8f9fa;
+                padding: 20px;
+                margin: 20px auto;
+                width: 80%;
+                border-radius: 10px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        
+            .contenedor-platillos h2 {
+                text-align: center;
+                color: #333333;
+                margin-bottom: 20px;
+            }
+        
+            .contenedor-platillos ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                padding: 0;
+            }
+        
+            .contenedor-platillos li {
+                background-color: white;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                margin: 10px;
+                padding: 15px;
+                width: 200px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+        
+            .contenedor-platillos img {
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+        
+            .btn-eliminar {
+                background-color: red;
+                color: white;
+                padding: 5px 10px;
+                border: none;
+                border-radius: 5px;
+                margin-top: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+        
+            .btn-eliminar:hover {
+                background-color: darkred;
+            }
+        </style>
+    </head>
+    <div class="formulario-platillo">
+        <h2>Registrar Platillo</h2>
+        {% if success %}
+            <script>
+                alert("¡El platillo ha sido registrado exitosamente!");
+            </script>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data" action="{% url 'newPlatillo' %}">
+            {% csrf_token %}
+            <div class="grupo-input">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="grupo-input">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
+            <div class="grupo-input">
+                <label for="foto">Imagen</label>
+                <input type="file" id="foto" name="foto" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn-crear">Crear Platillo</button>
+        </form>
+    </div>
+    
+    <div class="contenedor-platillos">
+        <h2>Platillos Almacenados</h2>
+        <ul>
+            {% for platillo in platillos %}
+            <li>
+                <h3>{{ platillo.nombre }}</h3>
+                <p>{{ platillo.descripcion }}</p>
+                {% if platillo.foto %}
+                <img src="{{ platillo.foto.url }}" alt="Foto de {{ platillo.nombre }}" width="200" height="200">
+                {% endif %}
+                <form method="post" action="{% url 'deletePlatillo' platillo.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-eliminar">
+                        Eliminar
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    
+    {% endblock %}

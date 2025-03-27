@@ -1,0 +1,95 @@
+/* General Body Styling */
+body { 
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+}
+
+/* Form Container Styling */
+form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Error Messages */
+p {
+    color: #e63946; /* Color rojo para errores */
+    font-size: 14px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Table Layout for Inputs */
+table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 10px 0;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+/* Input Fields Styling */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9fafb;
+    color: #333333;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #3b82f6; /* Azul al enfocar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+/* Submit Button Styling */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #3b82f6; /* Azul brillante */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2563eb; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Reset Password Link Styling */
+a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}

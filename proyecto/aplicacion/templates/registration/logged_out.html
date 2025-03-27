@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión Finalizada</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'aplicacion/logged_out.css' %}">
+</head>
+<body>
+    <div class="logout-container">
+        <p>¡Sesión finalizada!</p>
+        <a href="{% url 'login' %}" class="login-link">Haga clic aquí para iniciar sesión nuevamente.</a>
+    </div>
+</body>
+</html>

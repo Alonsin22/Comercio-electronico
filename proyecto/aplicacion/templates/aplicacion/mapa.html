@@ -1,0 +1,90 @@
+{% extends 'aplicacion/templates.html' %}
+
+{% block mapa %}
+
+<form id="formulario" method="POST" action="{% url 'mapa' %}">
+    {% csrf_token %}
+    <input type="text" name="lat" placeholder="Latitud" id="lat" value="{{lat}}">
+    <input type="text" name="lon" placeholder="Longitud" id="lon" value="{{lon}}">
+    <button type="submit" class="btn-submit">Actualizar Mapa</button>
+</form>
+
+<div id="map"></div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9; /* Fondo claro y suave */
+        margin: 0;
+        padding: 0;
+    }
+
+    #formulario {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra agradable */
+        border-radius: 10px;
+        width: 50%; /* Ajustar tamaño */
+        margin: 20px auto;
+    }
+
+    #formulario input {
+        margin: 10px 0;
+        padding: 10px;
+        width: 90%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    #formulario .btn-submit {
+        background-color: #4CAF50; /* Verde atractivo */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    #formulario .btn-submit:hover {
+        background-color: #45a049; /* Color más intenso al pasar el mouse */
+    }
+
+    #map {
+        height: 40vh; 
+        width: 50vh;
+        margin: 20px auto;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    }
+</style>
+    <script>
+        function iniciarMap() {
+    let lat = document.getElementById('lat').value;
+    let lon = document.getElementById('lon').value;
+    lat = parseFloat(lat); 
+    lon = parseFloat(lon); 
+
+    const coord = { lat: lat, lng: lon }; 
+    const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 18,
+        center: coord
+    });
+
+    const marker = new google.maps.Marker({
+        position: coord,
+        map: map
+    });
+}
+
+window.onload = iniciarMap;
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+    
+{% endblock %}

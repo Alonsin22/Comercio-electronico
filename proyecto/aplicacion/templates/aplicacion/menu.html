@@ -1,0 +1,25 @@
+{% extends 'aplicacion/templates.html' %}
+
+    {% block crear %}
+    
+    {% endblock %}
+
+    {% block obtener %}
+    <div class="platillos-container">
+        <h2>Platillos Almacenados</h2>
+        <ul  style="display: flex; flex-wrap: wrap;">
+            {% for platillo in platillos %}
+            <li style="margin: 3px;">
+                <h3>{{ platillo.nombre }}</h3>
+                <p>{{ platillo.descripcion }}</p>
+                {% if platillo.foto %}
+                <img src="{{ platillo.foto.url }}" alt="Foto de {{ platillo.nombre }}" width="200" height="200">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% endblock %}
+
+

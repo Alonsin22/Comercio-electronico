@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>El Sazon</title>
+        {% load static %}
+        <link rel="icon" href="{% static 'imagenes/logo.png' %}" type="image/png">
+        <link rel="stylesheet" href="{% static 'aplicacion/styles.css' %}">
+    </head>
+
+    <body>
+        {% block login %}
+        {% endblock %}
+
+        {% block reset_password %} 
+        {% endblock %}
+
+        {% block done %}
+        {% endblock %}
+
+        {% block confirm %}
+        {% endblock %}
+
+        {% block complete %}
+        {% endblock %}
+    </body>
+</html>
