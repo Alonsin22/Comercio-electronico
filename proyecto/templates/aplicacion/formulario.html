@@ -8,7 +8,7 @@
             /* Estilo para el formulario de registrar platillos */
             .formulario-platillo {
                 background-color: #ffffff;
-                padding: 20px;
+                padding: 40px;
                 margin: 20px auto;
                 width: 60%;
                 border-radius: 10px;
@@ -20,7 +20,7 @@
                 margin-bottom: 15px;
                 color: #333333;
             }
-        
+
             .grupo-input {
                 margin-bottom: 15px;
             }
@@ -108,10 +108,12 @@
             .btn-eliminar:hover {
                 background-color: darkred;
             }
+
+
         </style>
     </head>
     <div class="formulario-platillo">
-        <h2>Registrar Platillo</h2>
+        <h2>Registrar Producto</h2>
         {% if success %}
             <script>
                 alert("¡El platillo ha sido registrado exitosamente!");
@@ -125,31 +127,39 @@
             </div>
             <div class="grupo-input">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+            </div>
+            <div class="grupo-input">
+                <label for="Precio">Precio</label>
+                <input id="precio" name="precio" type="number" required></input>
             </div>
             <div class="grupo-input">
                 <label for="foto">Imagen</label>
                 <input type="file" id="foto" name="foto" accept="image/*" required>
             </div>
-            <button type="submit" class="btn-crear">Crear Platillo</button>
+            <button type="submit" class="btn-crear">Crear Producto</button>
         </form>
     </div>
     
     <div class="contenedor-platillos">
-        <h2>Platillos Almacenados</h2>
+        <h2>Productos Almacenados</h2>
+        {% if productos %}
+            <p>Estos son los productos que ya tienes almacenados:</p>
+        {% else %}
+            <p>No hay productos almacenados.</p>
+        {% endif %}
         <ul>
-            {% for platillo in platillos %}
+            {% for producto in productos %}
             <li>
-                <h3>{{ platillo.nombre }}</h3>
-                <p>{{ platillo.descripcion }}</p>
-                {% if platillo.foto %}
-                <img src="{{ platillo.foto.url }}" alt="Foto de {{ platillo.nombre }}" width="200" height="200">
+                <h3>{{ producto.nombre }}</h3>
+                <p>{{ producto.descripcion }}</p>
+                <p>${{ producto.precio }}</p>
+                {% if producto.foto %}
+                <img src="{{ producto.foto.url }}" alt="Foto de {{ producto.nombre }}" width="200" height="200">
                 {% endif %}
-                <form method="post" action="{% url 'deletePlatillo' platillo.id %}">
+                <form method="post" action="{% url 'deletePlatillo' producto.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn-eliminar">
-                        Eliminar
-                    </button>
+                    <button type="submit" class="btn-eliminar">Eliminar</button>
                 </form>
             </li>
             {% endfor %}

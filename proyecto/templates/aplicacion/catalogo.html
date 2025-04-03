@@ -1,0 +1,102 @@
+{% extends 'aplicacion/templates.html' %}
+
+{% block catalogo %}
+<head>
+    <style>
+        .contenedor-productos {
+            width: 90%; /* Aumentamos el ancho para acomodar 3 productos */
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .producto {
+            display: inline-block;
+            width: 25%; /* Ajustamos el ancho para 3 productos por línea */
+            margin: 10px; /* Reducimos el margen para mejor espaciado */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            vertical-align: top; /* Alinea los productos en la parte superior */
+        }
+
+        .producto img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .producto h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .producto p {
+            margin-bottom: 15px;
+        }
+
+        .producto a {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: block;
+            margin-top: 15px;
+        }
+
+        .producto a:hover {
+            background-color: #0056b3;
+        }
+
+        .buscador-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .buscador-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .buscador-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buscador-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<div class="contenedor-productos">
+    <h1>Catálogo de Productos</h1>
+    <h2>Productos Almacenados</h2>
+    <div class="buscador-form">
+        <form action="{% url 'buscador' %}" method="get">
+            <input type="text" class="buscador-input" placeholder="Busca los artículos" name="search" id="buscador">
+            <button type="submit" class="buscador-button">Buscar</button>
+        </form>
+    </div>
+    <div>
+        {% for producto in productos %}
+            <div class="producto">
+                <h3>{{ producto.nombre }}</h3>
+                <p>{{ producto.descripcion }}</p>
+                <p>${{ producto.precio }}</p>
+                {% if producto.foto %}
+                    <img src="{{ producto.foto.url }}" alt="Foto de {{ producto.nombre }}" width="200" height="200">
+                {% endif %}
+                <a href="{% url 'add' producto.id %}">Añadir al carrito</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

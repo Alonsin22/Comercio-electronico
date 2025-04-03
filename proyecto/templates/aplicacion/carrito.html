@@ -1,0 +1,106 @@
+{% extends 'aplicacion/templates.html' %}
+{% block carrito %}
+<head>
+    <style>
+        .carrito-container {
+            width: 80%;
+            margin: 20px auto;
+            font-family: 'Arial', sans-serif;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .carrito-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .carrito-table thead {
+            background-color: #f3f3f3;
+        }
+
+        .carrito-table th,
+        .carrito-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .carrito-table th {
+            font-weight: 600;
+        }
+
+        .carrito-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .carrito-total {
+            padding: 20px;
+            text-align: right;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .carrito-acciones a {
+            padding: 5px 10px;
+            margin: 0 5px;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            color: #007bff;
+        }
+
+        .carrito-acciones a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .carrito-vacio {
+            padding: 20px;
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<div class="carrito-container">
+    <table class="carrito-table">
+        <thead>
+            <tr>
+                <th colspan="4" class="text-center">Carrito</th>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if request.session.carrito.items %}
+                {% for key, value in request.session.carrito.items %}
+                    <tr>
+                        <td>{{ value.nombre }}</td>
+                        <td>${{ value.total }}0</td>
+                        <td>{{ value.cantidad }}</td>
+                        <td class="carrito-acciones">
+                            <a href="{% url 'more' key %}"> + </a>
+                            <a href="{% url 'rest' key %}"> - </a>
+                            <a href="{% url 'delete' key %}">eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" class="carrito-vacio">Sin productos en el carrito.</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td colspan="3">Total</td>
+                <td class="carrito-total">${{ total_carrito }}0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

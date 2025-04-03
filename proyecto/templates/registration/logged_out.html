@@ -1,0 +1,36 @@
+{% extends 'registration/plantilla_login.html' %}
+
+{% block loggout %}
+<style>
+    .logout-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logout-message {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-link {
+    background-color: #4CAF50; /* Verde */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.login-link:hover {
+    background-color: #45a049; /* Verde más oscuro */
+}
+</style>
+
+<p>¡Sesión finalizada!</p>
+
+<a href="{% url 'login'%}">Haga clic aquí para iniciar sesión nuevamente.</a>
+{% endblock %}

@@ -1,10 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import administrador
 
-admin.site.register(administrador)
+from .models import Producto
 
-from .models import Platillo
-
-admin.site.register(Platillo)
+admin.site.register(Producto)

@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
 
-    <title>El Sazon</title>
+    <title>Tianguis</title>
     {% load static %}
-    <link rel="icon" href="{% static 'imagenes/logo.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'imagenes/logito.png' %}" type="image/png">
     <style>
         .b-example-divider {
-            height: 10px;
+            height: 30px;
             background-color: white;
             border: solid rgba(0, 0, 0, .15);
             box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
@@ -59,15 +59,8 @@
             transition: color 0.3s;
         }
 
-        .sidebar-nav a:hover, .nav-bar ul a:hover {
+        .sidebar-nav a:hover, .nav-bar ul a:hover, button:hover {
             color: #ffc107; /* Amarillo dorado */
-        }
-
-        .b-example-divider {
-            height: 0.5rem;
-            background-color: #e9ecef;
-            border: solid rgba(0, 0, 0, .15);
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
         }
 
         footer {
@@ -97,6 +90,16 @@
         .footer-content .social-icons a:hover {
             color: #ffc107;
         }
+
+        button{
+            text-decoration: none;
+            color: white;
+            border: none;
+            background-color: rgba(52, 58, 64,100); 
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
     </style>
 </head>
 <body>
@@ -105,18 +108,25 @@
         <header>
             <nav class="nav-bar" style="display: flex; justify-content: space-between;">
                 <ul class="sidebar-nav">
-                    <li><img style="height: 20px; width: 20px;" src="{% static 'imagenes/logo.png' %}" alt="Logo"></li>
+                    <li><img style="height: 20px; width: 20px;" src="{% static 'imagenes/logito.png' %}" alt="Logo"></li>
                     {% if user.is_authenticated %}
-                      <li> {{ user.get_username }}</li>
-                      <li><a href="{% url 'logout'%}?next={{request.path}}">Cerrar sesión</a></li>
+                    <li> {{ user.get_username }}</li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Cerrar sesión</button>
+                    </form>
                     {% else %}
-                      <li><a href="{% url 'login'%}?next={{request.path}}">Iniciar sesión</a></li>
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <button type="submit">Iniciar sesión</button>
+                    </form>
                     {% endif %}
                 </ul>
                 <ul style="margin-right: 20px;">
                     <li><a href="/mapa/">Mapa</a></li>
                     <li><a href="/menu/">Menu</a></li>
                     <li><a href="/catalogo/">Catalogo</a></li>
+                    <li><a href="/carrito/">Carrito</a></li>
                 </ul>
             </nav>
         </header>
@@ -124,6 +134,14 @@
         <div class="b-example-divider"></div>
     
         {% block crear %}
+    
+        {% endblock %}
+
+        {% block catalogo %}
+    
+        {% endblock %}
+
+        {% block carrito %}
     
         {% endblock %}
     
@@ -141,7 +159,6 @@
             </div>
         </footer>
     </div>
-   
 </body>
 
 </html>
