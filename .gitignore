@@ -1,0 +1,9 @@
+/manage.py/
+/__pycache__/   
+/.vscode/
+/.idea/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
